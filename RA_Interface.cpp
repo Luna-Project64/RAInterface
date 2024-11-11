@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "RA_Interface.h"
 
 #include <winhttp.h>
@@ -17,7 +19,7 @@ static int          (CCONV* _RA_InitI)(HWND hMainWnd, int nConsoleID, const char
 static int          (CCONV* _RA_InitOffline)(HWND hMainWnd, int nConsoleID, const char* sClientVer) = nullptr;
 static int          (CCONV* _RA_InitClient)(HWND hMainWnd, const char* sClientName, const char* sClientVer) = nullptr;
 static int          (CCONV* _RA_InitClientOffline)(HWND hMainWnd, const char* sClientName, const char* sClientVer) = nullptr;
-static void         (CCONV* _RA_InstallSharedFunctions)(int(*)(), void(*)(), void(*)(), void(*)(), void(*)(char*), void(*)(), void(*)(const char*)) = nullptr;
+static void         (CCONV* _RA_InstallSharedFunctions)(int(__cdecl*)(), void(__cdecl*)(), void(__cdecl*)(), void(__cdecl*)(), void(__cdecl*)(char*), void(__cdecl*)(), void(__cdecl*)(const char*)) = nullptr;
 static void         (CCONV* _RA_SetForceRepaint)(int bEnable) = nullptr;
 static HMENU        (CCONV* _RA_CreatePopupMenu)() = nullptr;
 static int          (CCONV* _RA_GetPopupMenuItems)(RA_MenuItem*) = nullptr;
@@ -977,7 +979,7 @@ void RA_SetUserAgentDetail(const char* sDetail)
         _RA_SetUserAgentDetail(sDetail);
 }
 
-void RA_InstallSharedFunctions(int(*)(void), void(*fpCauseUnpause)(void), void(*fpCausePause)(void), void(*fpRebuildMenu)(void), void(*fpEstimateTitle)(char*), void(*fpResetEmulation)(void), void(*fpLoadROM)(const char*))
+void RA_InstallSharedFunctions(int(__cdecl *)(void), void(__cdecl *fpCauseUnpause)(void), void(__cdecl *fpCausePause)(void), void(__cdecl *fpRebuildMenu)(void), void(__cdecl *fpEstimateTitle)(char*), void(__cdecl *fpResetEmulation)(void), void(__cdecl *fpLoadROM)(const char*))
 {
     if (_RA_InstallSharedFunctions != nullptr)
         _RA_InstallSharedFunctions(nullptr, fpCauseUnpause, fpCausePause, fpRebuildMenu, fpEstimateTitle, fpResetEmulation, fpLoadROM);

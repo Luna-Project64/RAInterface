@@ -46,9 +46,9 @@ extern void RA_InitClient(HWND hMainHWND, const char* sClientName, const char* s
  * @param fpResetEmulator   resets the emulator
  * @param fpLoadROM         [currently unused] tells the emulator to load a specific game
  */
-extern void RA_InstallSharedFunctions(int (*fpUnusedIsActive)(void),
-    void (*fpCauseUnpause)(void), void (*fpCausePause)(void), void (*fpRebuildMenu)(void),
-    void (*fpEstimateTitle)(char*), void (*fpResetEmulator)(void), void (*fpLoadROM)(const char*));
+extern void RA_InstallSharedFunctions(int (__cdecl *fpUnusedIsActive)(void),
+    void (__cdecl*fpCauseUnpause)(void), void (__cdecl*fpCausePause)(void), void (__cdecl *fpRebuildMenu)(void),
+    void (__cdecl*fpEstimateTitle)(char*), void (__cdecl*fpResetEmulator)(void), void (__cdecl *fpLoadROM)(const char*));
 
 /**
  * Tells the DLL to use UpdateWindow instead of InvalidateRect when the UI needs to be repainted. This is primarily
@@ -127,8 +127,8 @@ extern void RA_SetConsoleID(unsigned int nConsoleID);
  */
 extern void RA_ClearMemoryBanks(void);
 
-typedef unsigned char (RA_ReadMemoryFunc)(unsigned int nAddress);
-typedef void (RA_WriteMemoryFunc)(unsigned int nAddress, unsigned char nValue);
+typedef unsigned char (__cdecl RA_ReadMemoryFunc)(unsigned int nAddress);
+typedef void (__cdecl RA_WriteMemoryFunc)(unsigned int nAddress, unsigned char nValue);
 /**
  * Exposes a block of memory to the DLL.
  *
@@ -142,7 +142,7 @@ typedef void (RA_WriteMemoryFunc)(unsigned int nAddress, unsigned char nValue);
  */
 extern void RA_InstallMemoryBank(int nBankID, RA_ReadMemoryFunc pReader, RA_WriteMemoryFunc pWriter, int nBankSize);
 
-typedef unsigned int (RA_ReadMemoryBlockFunc)(unsigned int nAddress, unsigned char* pBuffer, unsigned int nBytes);
+typedef unsigned int (__cdecl RA_ReadMemoryBlockFunc)(unsigned int nAddress, unsigned char* pBuffer, unsigned int nBytes);
 extern void RA_InstallMemoryBankBlockReader(int nBankID, RA_ReadMemoryBlockFunc pReader);
 
 /**
