@@ -684,7 +684,7 @@ static const char* CCONV _RA_InstallIntegration()
     _RA_InitOffline = (int(CCONV*)(HWND, int, const char*))                          GetProcAddress(g_hRADLL, "_RA_InitOffline");
     _RA_InitClient = (int(CCONV*)(HWND, const char*, const char*))                   GetProcAddress(g_hRADLL, "_RA_InitClient");
     _RA_InitClientOffline = (int(CCONV*)(HWND, const char*, const char*))            GetProcAddress(g_hRADLL, "_RA_InitClientOffline");
-    _RA_InstallSharedFunctions = (void(CCONV*)(int(*)(), void(*)(), void(*)(), void(*)(), void(*)(char*), void(*)(), void(*)(const char*))) GetProcAddress(g_hRADLL, "_RA_InstallSharedFunctionsExt");
+    _RA_InstallSharedFunctions = (void(CCONV*)(int(CCONV*)(), void(CCONV*)(), void(CCONV*)(), void(CCONV*)(), void(CCONV*)(char*), void(CCONV*)(), void(CCONV*)(const char*))) GetProcAddress(g_hRADLL, "_RA_InstallSharedFunctionsExt");
     _RA_SetForceRepaint = (void(CCONV*)(int))                                        GetProcAddress(g_hRADLL, "_RA_SetForceRepaint");
     _RA_CreatePopupMenu = (HMENU(CCONV*)(void))                                      GetProcAddress(g_hRADLL, "_RA_CreatePopupMenu");
     _RA_GetPopupMenuItems = (int(CCONV*)(RA_MenuItem*))                              GetProcAddress(g_hRADLL, "_RA_GetPopupMenuItems");
